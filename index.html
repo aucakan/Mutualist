@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mutualist</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+</head>
+<body>
+  <main>
+    <div class="container">
+      <h1 style="margin-top: 50px;">Mutualist</h1>
+      <div style="text-align:center; margin: 0;">
+        <p><a href="instructions.html" target="_blank" style="text-decoration: none; font-size: large; font-weight: 700;" class="instructions-btn">Instructions</a></p>
+      </div>
+      <div class="files-col">
+        <label>HTML File for Followers <input type="file" id="followersFile" accept=".html,.htm" /></label>
+        <label>HTML File for Following <input type="file" id="followingFile" accept=".html,.htm" /></label>
+      </div>
+      <div style="text-align: center; padding: 10px;">
+        <button onclick="analyze()"><span style="padding: 20px;">Analyze</span></button>
+      </div>
+      <div id="tabs" class="tabs" style="display: none;">
+        <button class="tab" id="tab-mutual" onclick="showTab('mutual')">Karşılıklı (<span id="count-mutual">0</span>)</button>
+        <button class="tab" id="tab-fans" onclick="showTab('fans')">Senin Takip Etmediklerin (<span id="count-fans">0</span>)</button>
+        <button class="tab" id="tab-unf" onclick="showTab('unf')">Seni Takip Etmeyenler (<span id="count-unf">0</span>)</button>
+      </div>
+      <div class="result-list" id="result"></div>
+    </div>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
