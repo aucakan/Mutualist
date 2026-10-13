@@ -1,36 +1,58 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mutualist</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mutualist</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
 </head>
 <body>
-  <main>
-    <div class="container">
-      <h1 style="margin-top: 50px;">Mutualist</h1>
-      <div style="text-align:center; margin: 0;">
-        <p><a href="information/information.html" target="_blank" style="text-decoration: none; font-size: large; font-weight: 700;">Mutualist & Privacy</a><br><a href="instructions/instructions.html" target="_blank" style="text-decoration: none; font-size: large; font-weight: 700;">Instructions</a></p>
-      </div>
+  <main class="container">
+    <header class="header"><a class="brand" href="index.html">Mutualist</a><nav aria-label="Bilgi" data-i18n-aria="navigation"><a data-i18n="guide" href="instructions/instructions.html">Nasıl kullanılır?</a><a data-i18n="privacy" href="information/information.html">Gizlilik</a><span class="language-switch" aria-label="Language"><button type="button" data-language="tr" lang="tr">TR</button><button type="button" data-language="en" lang="en">EN</button></span></nav></header>
+    <section aria-labelledby="intro-title">
+      <h2 id="intro-title" data-i18n="headline">Kim takipte, kim değil?</h2>
+      <p class="intro" data-i18n="intro">Instagram’dan indirdiğin HTML dosyalarını seç, takip listelerini karşılaştır.</p>
       <div class="files-col">
-        <label>HTML File for Followers <input type="file" id="followersFile" accept=".html,.htm" /></label>
-        <label>HTML File for Following <input type="file" id="followingFile" accept=".html,.htm" /></label>
+        <label class="file-field" for="followersFile">
+          <span class="file-label" data-i18n="followers">Takipçilerin</span>
+          <span class="file-hint">followers_1.html, followers_2.html, …</span>
+          <input type="file" id="followersFile" multiple accept=".html,.htm" />
+        </label>
+        <label class="file-field" for="followingFile">
+          <span class="file-label" data-i18n="following">Takip ettiklerin</span>
+          <span class="file-hint">following.html</span>
+          <input type="file" id="followingFile" accept=".html,.htm" />
+        </label>
       </div>
-      <div style="text-align: center; padding: 10px;">
-        <button onclick="analyze()"><span style="padding: 20px;">Analyze</span></button>
+      <div class="actions">
+        <button class="analyze-button" onclick="analyze()"><span data-i18n="compare">Karşılaştır</span> <span aria-hidden="true">→</span></button>
+        <p class="privacy-note" data-i18n="local">Dosyaların tarayıcında kalır.</p>
       </div>
+      <p id="status" role="status" class="status" hidden></p>
+    </section>
+    <section class="results" id="results" aria-label="Karşılaştırma sonuçları" data-i18n-aria="results" hidden>
       <div id="tabs" class="tabs" style="display: none;">
-        <button class="tab" id="tab-mutual" onclick="showTab('mutual')">Karşılıklı (<span id="count-mutual">0</span>)</button>
-        <button class="tab" id="tab-fans" onclick="showTab('fans')">Senin Takip Etmediklerin (<span id="count-fans">0</span>)</button>
-        <button class="tab" id="tab-unf" onclick="showTab('unf')">Seni Takip Etmeyenler (<span id="count-unf">0</span>)</button>
+        <button class="tab" id="tab-mutual" onclick="showTab('mutual')"><span data-i18n="mutual">Karşılıklı</span> <span class="count" id="count-mutual">0</span></button>
+        <button class="tab" id="tab-fans" onclick="showTab('fans')"><span data-i18n="fans">Senin takip etmediklerin</span> <span class="count" id="count-fans">0</span></button>
+        <button class="tab" id="tab-unf" onclick="showTab('unf')"><span data-i18n="unf">Seni takip etmeyenler</span> <span class="count" id="count-unf">0</span></button>
       </div>
-      <div class="result-list" id="result"></div>
-    </div>
+      <div class="result-actions"><button type="button" class="secondary-button" id="exportButton" data-i18n="export">Dışa aktar</button></div>
+      <div class="result-list" id="result" aria-live="polite"></div>
+    </section>
   </main>
+  <dialog id="exportDialog" aria-labelledby="exportTitle">
+    <form id="exportForm">
+      <h2 id="exportTitle" data-i18n="export">Dışa aktar</h2>
+      <p id="exportSummary"></p>
+      <label for="exportFormat" data-i18n="format">Dosya formatı</label>
+      <select id="exportFormat"><option value="txt">TXT</option><option value="csv">CSV</option><option value="md">Markdown (.md)</option></select>
+      <div class="dialog-actions"><button type="button" id="cancelExport" class="secondary-button" data-i18n="cancel">Vazgeç</button><button type="submit" class="analyze-button" data-i18n="download">İndir</button></div>
+    </form>
+  </dialog>
+  <script src="language.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
