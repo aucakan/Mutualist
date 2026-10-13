@@ -2,7 +2,7 @@ let results = {mutual: [], fans: [], unf: []};
 
 function extractUsernames(html) {
   let usernames = new Set();
-  let regex = /https:\/\/www\.instagram\.com\/([^/"']+)/g;
+  let regex = /https:\/\/www\.instagram\.com\/(?:_u\/)?([a-zA-Z0-9._]+)/g;
   let m;
   while ((m = regex.exec(html))) {
     usernames.add(m[1].toLowerCase());
